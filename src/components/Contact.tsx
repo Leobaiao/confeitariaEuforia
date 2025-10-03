@@ -8,8 +8,8 @@ import React from 'react';
 
 export function Contact() {
   // Número do WhatsApp da Euforia
-  const phoneNumber = "5511951559885";
-  const formattedPhone = "(11) 97613-1029";
+  const phoneNumber = "5511999999999"; // Formato internacional sem espaços ou símbolos
+  const formattedPhone = "(11) 99999-9999"; // Formato para exibição
   
   // Estado para controlar o campo de produto
   const [productType, setProductType] = React.useState('');
