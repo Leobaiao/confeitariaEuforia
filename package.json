@@ -1,5 +1,5 @@
 {
-  "name": "Euforia Confectionery Website",
+  "name": "euforia-confectionery-website",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -56,8 +56,7 @@
   },
   "scripts": {
     "dev": "vite",
-     "build": "chmod -R +x node_modules/.bin && vite build",
-    "postinstall": "chmod -R +x node_modules/.bin",
+    "build": "vite build",
     "lint": "...",
     "preview": "vite preview"
   }
