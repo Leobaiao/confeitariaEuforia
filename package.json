@@ -1,5 +1,5 @@
 {
-   "name": "Euforia-Confectionery-Website",
+   "name": "euforia-confectionery-website",
   "version": "0.1.0",
   "homepage": "https://confeitaria-euforia-2s8g.vercel.app", // ⬅️ ADICIONE ESTA LINHA COM SEU DOMÍNIO
   "private": true,
