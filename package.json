@@ -52,6 +52,7 @@
             "@vitejs/plugin-react-swc": "^3.10.2",
             "vite": "6.3.5"
       },
+<<<<<<< HEAD
 "scripts": {
     "dev": "vite",
     "build": "chmod -R +x node_modules/.bin && vite build",
@@ -59,4 +60,15 @@
     "lint": "...", 
     "preview": "..."
 }
+=======
+      "scripts": {
+            "dev": "vite",
+            "build": "vite build",
+<<<<<<< HEAD
+            "postinstall": "chmod -R +x node_modules/.bin"
+=======
+            "postinstall": "chmod +x node_modules/.bin/vite"
+>>>>>>> cf9cf4734d78a025174088f1eea03b14c30b7d62
+      }
+>>>>>>> e328cfcb74060b9d3f6d03e2c3bee3700eba1daf
 }
