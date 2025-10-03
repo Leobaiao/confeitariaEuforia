@@ -57,12 +57,8 @@ export default defineConfig({
   // -----------------------
   build: {
     target: 'esnext',
-    outDir: 'dist', 
-    rollupOptions: {
-      external: [
-        'motion/react'
-      ]
-    }
+    outDir: 'dist'
+
   },
   server: {
     port: 3000,
