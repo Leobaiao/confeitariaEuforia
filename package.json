@@ -1,7 +1,6 @@
 {
    "name": "euforia-confectionery-website",
   "version": "0.1.0",
-  "homepage": "https://confeitaria-euforia-2s8g.vercel.app", // ⬅️ ADICIONE ESTA LINHA COM SEU DOMÍNIO
   "private": true,
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",
@@ -55,10 +54,9 @@
     "@vitejs/plugin-react-swc": "^3.10.2",
     "vite": "^6.3.5"
   },
-  "scripts": {
+ "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "chmod -R +x node_modules/.bin && vite build",
     "lint": "...",
     "preview": "vite preview"
-  }
 }
