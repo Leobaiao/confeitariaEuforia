@@ -58,6 +58,5 @@
     "postinstall": "chmod -R +x node_modules/.bin",
     "lint": "...", 
     "preview": "..."
-    // Mantenha quaisquer outros scripts que existiam fora do bloco de conflito
 }
 }
