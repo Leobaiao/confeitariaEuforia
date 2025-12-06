@@ -1,4 +1,5 @@
 import { Heart, Instagram, Facebook, Mail, Phone, UtensilsCrossed, MapPin } from 'lucide-react';
+import { CONTATO, REDES_SOCIAIS, getWhatsAppLink } from '../constants';
 
 export function Footer() {
   return (
@@ -21,7 +22,7 @@ export function Footer() {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://www.instagram.com/euforia.confeitaria"
+                href={REDES_SOCIAIS.INSTAGRAM}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:to-orange-400 transition-all duration-300 hover:scale-110"
@@ -29,7 +30,7 @@ export function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://www.facebook.com/euforia.confeitaria"
+                href={REDES_SOCIAIS.FACEBOOK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:to-orange-400 transition-all duration-300 hover:scale-110"
@@ -37,13 +38,13 @@ export function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="mailto:contato@euforia.com.br"
+                href={`mailto:${CONTATO.EMAIL}`}
                 className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:to-orange-400 transition-all duration-300 hover:scale-110"
               >
                 <Mail className="w-5 h-5" />
               </a>
               <a
-                href="https://wa.me/5511951559885"
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:to-orange-400 transition-all duration-300 hover:scale-110"
@@ -51,7 +52,7 @@ export function Footer() {
                 <Phone className="w-5 h-5" />
               </a>
               <a
-                href="https://www.ifood.com.br/delivery/sao-paulo-sp/euforia-confeitaria"
+                href={REDES_SOCIAIS.IFOOD}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:to-orange-400 transition-all duration-300 hover:scale-110"
@@ -95,11 +96,11 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-pink-400" />
-                <span className="text-gray-300">(11) 992232935</span>
+                <span className="text-gray-300">{CONTATO.TELEFONE_FORMATADO}</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-pink-400" />
-                <span className="text-gray-300">contato@euforia.com.br</span>
+                <span className="text-gray-300">{CONTATO.EMAIL}</span>
               </li>
               <li className="flex items-center space-x-3" title="Endereço">
                 <MapPin className="w-4 h-4 text-pink-400" />

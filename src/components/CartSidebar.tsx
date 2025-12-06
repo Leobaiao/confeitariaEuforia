@@ -5,6 +5,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Minus, Plus, Trash2, ShoppingBag, CreditCard } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getWhatsAppLink, REDES_SOCIAIS } from '../constants';
 
 export function CartSidebar() {
   const {
@@ -177,14 +178,8 @@ export function CartSidebar() {
 
                         const message = `Olá! 🍰 Gostaria de fazer um pedido:\n\n${itemsList}\n\n💰 *Total: ${total}*\n\n📍 Meu endereço:\n[Preencha seu endereço aqui]\n\n📱 Meu telefone:\n[Preencha seu telefone aqui]`;
 
-                        // Número do WhatsApp da confeitaria (formato internacional sem +)
-                        const phoneNumber = '5511992232935';
-
-                        // Codificar a mensagem para URL
-                        const encodedMessage = encodeURIComponent(message);
-
-                        // Abrir WhatsApp
-                        window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+                        // Abrir WhatsApp com a mensagem
+                        window.open(getWhatsAppLink(message), '_blank');
 
                         // Fechar o carrinho
                         closeCart();
@@ -203,7 +198,7 @@ export function CartSidebar() {
                       size="lg"
                       onClick={() => {
                         // Redirecionar para o iFood
-                        window.open('https://www.ifood.com.br/delivery/sao-paulo-sp/euforia-confeitaria', '_blank');
+                        window.open(REDES_SOCIAIS.IFOOD, '_blank');
                       }}
                     >
                       <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">

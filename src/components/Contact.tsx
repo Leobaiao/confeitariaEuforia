@@ -4,13 +4,10 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, UtensilsCrossed } from 'lucide-react';
 import { useWishlist } from './WishlistContext';
+import { CONTATO, REDES_SOCIAIS, getWhatsAppLink } from '../constants';
 import React from 'react';
 
 export function Contact() {
-  // Número do WhatsApp da Euforia
-  const phoneNumber = "5511992232935"; // Formato internacional sem espaços ou símbolos
-  const formattedPhone = "(11) 99223-2935"; // Formato para exibição
-
   // Estado para controlar o campo de produto
   const [productType, setProductType] = React.useState('');
 
@@ -126,8 +123,7 @@ Aguardo retorno! ❤️`;
                   const encodedMessage = encodeURIComponent(message);
 
                   // Abrir WhatsApp
-                  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-                  window.open(whatsappURL, '_blank');
+                  window.open(getWhatsAppLink(message), '_blank');
                 }}
                 className="w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
                 size="lg"
@@ -179,7 +175,7 @@ Aguardo retorno! ❤️`;
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <h4 className="font-semibold mb-0.5 sm:mb-1 md:mb-2 text-gray-800 text-xs sm:text-sm md:text-base">Telefone</h4>
-                <p className="text-gray-600 text-[10px] sm:text-xs md:text-base">{formattedPhone}</p>
+                <p className="text-gray-600 text-[10px] sm:text-xs md:text-base">{CONTATO.TELEFONE_FORMATADO}</p>
               </Card>
 
               <Card className="p-2 sm:p-3 md:p-6 border-0 shadow-lg text-center">
@@ -187,7 +183,7 @@ Aguardo retorno! ❤️`;
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <h4 className="font-semibold mb-0.5 sm:mb-1 md:mb-2 text-gray-800 text-xs sm:text-sm md:text-base">E-mail</h4>
-                <p className="text-gray-600 text-[10px] sm:text-xs md:text-base break-all">contato@euforia.com.br</p>
+                <p className="text-gray-600 text-[10px] sm:text-xs md:text-base break-all">{CONTATO.EMAIL}</p>
               </Card>
             </div>
 
