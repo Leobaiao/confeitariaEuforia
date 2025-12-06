@@ -1,5 +1,5 @@
 import { UtensilsCrossed } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 export function FloatingIFood() {
   return (
@@ -17,10 +17,10 @@ export function FloatingIFood() {
         title="Pedir no iFood"
       >
         <UtensilsCrossed className="w-7 h-7 group-hover:rotate-12 transition-transform duration-300" />
-        
+
         {/* Pulse effect */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 to-red-500 animate-ping opacity-20"></div>
-        
+
         {/* Tooltip */}
         <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           🍰 Pedir no iFood

@@ -4,8 +4,8 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Star, Heart, ShoppingCart } from 'lucide-react';
 import { useCart } from './CartContext';
 import { useWishlist } from './WishlistContext';
-import { motion } from 'motion/react';
-import { toast } from 'sonner@2.0.3';
+import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 import React from 'react';
 
 const products = [
@@ -127,21 +127,21 @@ export function Products() {
 
   const handleAddToCart = React.useCallback(async (product: typeof products[0]) => {
     setLoadingStates(prev => ({ ...prev, [product.id]: true }));
-    
+
     // Simular loading para melhor UX
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
       image: product.image
     });
-    
+
     toast.success(`${product.name} adicionado ao carrinho! 🛒`, {
       description: `${product.price} - Aproveite nossos deliciosos doces`
     });
-    
+
     setLoadingStates(prev => ({ ...prev, [product.id]: false }));
   }, [addToCart]);
 
@@ -180,7 +180,7 @@ export function Products() {
             </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Cada doce é preparado com ingredientes selecionados e muito amor, 
+            Cada doce é preparado com ingredientes selecionados e muito amor,
             garantindo sabor e qualidade em cada mordida.
           </p>
         </div>
@@ -192,8 +192,8 @@ export function Products() {
               key={product.id}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6, 
+              transition={{
+                duration: 0.6,
                 delay: index * 0.1,
                 ease: "easeOut"
               }}
@@ -207,12 +207,12 @@ export function Products() {
                     alt={product.name}
                     className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  
+
                   {/* Overlay gradiente no hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   {product.popular && (
-                    <motion.div 
+                    <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.3 + index * 0.1, type: "spring", stiffness: 500 }}
@@ -221,23 +221,22 @@ export function Products() {
                       Popular
                     </motion.div>
                   )}
-                  
-                  <motion.button 
+
+                  <motion.button
                     whileHover={{ scale: 1.15 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => handleWishlistToggle(product)}
                     className="absolute top-3 right-3 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all duration-300 hover:shadow-lg z-10"
                   >
-                    <Heart 
-                      className={`w-5 h-5 transition-colors duration-200 ${
-                        isInWishlist(product.id) 
-                          ? 'text-pink-500 fill-pink-500' 
-                          : 'text-gray-600 hover:text-pink-500'
-                      }`} 
+                    <Heart
+                      className={`w-5 h-5 transition-colors duration-200 ${isInWishlist(product.id)
+                        ? 'text-pink-500 fill-pink-500'
+                        : 'text-gray-600 hover:text-pink-500'
+                        }`}
                     />
                   </motion.button>
                 </div>
-                
+
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="flex items-center">
@@ -245,27 +244,27 @@ export function Products() {
                       <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
                     </div>
                   </div>
-                  
+
                   <h3 className="text-lg font-semibold mb-2 text-gray-800 group-hover:text-pink-600 transition-colors duration-300">
                     {product.name}
                   </h3>
-                  
+
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {product.description}
                   </p>
-                  
+
                   <div className="flex flex-col gap-3">
                     <span className="text-2xl font-bold text-pink-500">
                       {product.price}
                     </span>
-                    
+
                     <div className="flex gap-2">
                       <motion.div
                         whileTap={{ scale: 0.95 }}
                         className="flex-1"
                       >
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           onClick={() => handleAddToCart(product)}
                           disabled={loadingStates[product.id]}
                           className="w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 disabled:opacity-50"
@@ -284,10 +283,10 @@ export function Products() {
                           )}
                         </Button>
                       </motion.div>
-                      
+
                       <motion.div whileTap={{ scale: 0.95 }}>
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           variant="outline"
                           className="px-3 border-pink-200 text-pink-600 hover:bg-pink-50"
                         >
@@ -304,16 +303,16 @@ export function Products() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Button 
-            size="lg" 
-            variant="outline" 
+          <Button
+            size="lg"
+            variant="outline"
             onClick={() => {
               const isExpanding = !showAll;
               toggleShowAll();
-              
+
               if (!isExpanding) {
                 setTimeout(() => {
-                  document.getElementById('produtos')?.scrollIntoView({ 
+                  document.getElementById('produtos')?.scrollIntoView({
                     behavior: 'smooth',
                     block: 'end'
                   });

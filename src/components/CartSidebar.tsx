@@ -4,16 +4,16 @@ import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Minus, Plus, Trash2, ShoppingBag, CreditCard } from 'lucide-react';
 import { Separator } from './ui/separator';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function CartSidebar() {
-  const { 
-    items, 
-    isOpen, 
-    closeCart, 
-    removeFromCart, 
-    updateQuantity, 
-    getTotalPrice 
+  const {
+    items,
+    isOpen,
+    closeCart,
+    removeFromCart,
+    updateQuantity,
+    getTotalPrice
   } = useCart();
 
   const formatPrice = (price: number) => {
@@ -48,7 +48,7 @@ export function CartSidebar() {
               <p className="text-gray-500 mb-6">
                 Adicione alguns doces deliciosos ao seu carrinho
               </p>
-              <Button 
+              <Button
                 onClick={closeCart}
                 className="bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
               >
@@ -62,7 +62,7 @@ export function CartSidebar() {
                 <div className="space-y-4">
                   <AnimatePresence>
                     {items.map((item, index) => (
-                      <motion.div 
+                      <motion.div
                         key={item.id}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -75,11 +75,11 @@ export function CartSidebar() {
                           alt={item.name}
                           className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
                         />
-                      
+
                         <div className="flex-1 space-y-2">
                           <h4 className="font-medium text-gray-800">{item.name}</h4>
                           <p className="text-pink-500 font-semibold">{item.price}</p>
-                          
+
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <motion.div whileTap={{ scale: 0.9 }}>
@@ -92,11 +92,11 @@ export function CartSidebar() {
                                   <Minus className="w-3 h-3" />
                                 </Button>
                               </motion.div>
-                              
+
                               <span className="w-8 text-center font-medium">
                                 {item.quantity}
                               </span>
-                              
+
                               <motion.div whileTap={{ scale: 0.9 }}>
                                 <Button
                                   size="sm"
@@ -108,7 +108,7 @@ export function CartSidebar() {
                                 </Button>
                               </motion.div>
                             </div>
-                            
+
                             <motion.div whileTap={{ scale: 0.9 }}>
                               <Button
                                 size="sm"
@@ -133,8 +133,8 @@ export function CartSidebar() {
                 <div className="p-3 bg-gradient-to-r from-pink-50 to-orange-50 rounded-lg">
                   <p className="text-sm text-gray-600 mb-2">Tem um cupom de desconto?</p>
                   <div className="flex gap-2">
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       placeholder="Digite seu cupom"
                       className="flex-1 px-3 py-2 text-sm border border-pink-200 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
                     />
@@ -161,20 +161,20 @@ export function CartSidebar() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="space-y-3">
                   <motion.div whileTap={{ scale: 0.98 }}>
-                    <Button 
+                    <Button
                       className="w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
                       size="lg"
                       onClick={() => {
                         // Simular processo de checkout
                         const total = formatPrice(getTotalPrice());
                         const itemCount = items.length;
-                        
+
                         // Fechar carrinho e mostrar mensagem de sucesso
                         closeCart();
-                        
+
                         // Simular tempo de processamento
                         setTimeout(() => {
                           alert(`🎉 Pedido confirmado!\n\n${itemCount} itens - Total: ${total}\n\nEm breve você receberá um email com os detalhes do pedido e informações de entrega.\n\nObrigado por escolher a Euforia! ❤️`);
@@ -185,9 +185,9 @@ export function CartSidebar() {
                       Finalizar Pedido
                     </Button>
                   </motion.div>
-                  
-                  <Button 
-                    variant="outline" 
+
+                  <Button
+                    variant="outline"
                     className="w-full border-pink-200 text-pink-600 hover:bg-pink-50"
                     onClick={closeCart}
                   >

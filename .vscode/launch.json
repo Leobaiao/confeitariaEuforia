@@ -21,7 +21,15 @@
             "preLaunchTask": "npm: dev"
         },
         {
-            "type": "msedge",
+            "type": "chrome",
+            "request": "launch",
+            "name": "chrome",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/src",
+            "preLaunchTask": "npm: dev"
+        },
+        {
+            "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
             "file": "${workspaceFolder}/index.html"

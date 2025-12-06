@@ -4,9 +4,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Heart, Trash2, ShoppingCart, Star } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { toast } from 'sonner@2.0.3';
-import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 interface WishlistSidebarProps {
   isOpen: boolean;
@@ -24,7 +23,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
       price: item.price,
       image: item.image
     });
-    
+
     toast.success(`${item.name} adicionado ao carrinho! 🛒`, {
       description: 'Item movido da wishlist para o carrinho'
     });
@@ -55,18 +54,25 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
           </SheetDescription>
         </SheetHeader>
 
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-[calc(100vh-8rem)] md:h-[calc(100vh-10rem)]">
           {items.length === 0 ? (
-            <div className="flex-1 flex flex-col items-center justify-center text-center py-12">
-              <Heart className="w-16 h-16 text-gray-300 mb-4" />
-              <h3 className="text-lg font-semibold text-gray-600 mb-2">
+            <div className="flex-1 flex flex-col items-center justify-center text-center py-8 md:py-12">
+              <Heart className="w-12 h-12 md:w-16 md:h-16 text-gray-300 mb-4" />
+              <h3 className="text-base md:text-lg font-semibold text-gray-600 mb-2">
                 Lista vazia
               </h3>
-              <p className="text-gray-500 mb-6">
+              <p className="text-sm md:text-base text-gray-500 mb-4 md:mb-6 px-4">
                 Adicione produtos aos favoritos clicando no ❤️
               </p>
-              <Button 
-                onClick={onClose}
+              <Button
+                onClick={() => {
+                  onClose();
+                  setTimeout(() => {
+                    document.getElementById('produtos')?.scrollIntoView({
+                      behavior: 'smooth'
+                    });
+                  }, 300);
+                }}
                 className="bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
               >
                 Explorar Produtos
@@ -74,27 +80,27 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
             </div>
           ) : (
             <>
-              {/* Wishlist Items */}
-              <div className="flex-1 overflow-auto py-6">
-                <div className="space-y-4">
+              {/* Wishlist Items - Scrollable Area */}
+              <div className="flex-1 overflow-y-auto overflow-x-hidden py-4 md:py-6 -mx-6 px-6">
+                <div className="space-y-3 md:space-y-4">
                   <AnimatePresence>
                     {items.map((item, index) => (
-                      <motion.div 
+                      <motion.div
                         key={item.id}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20, height: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.1 }}
-                        className="flex gap-4 p-4 border border-gray-100 rounded-lg hover:shadow-md transition-shadow group"
+                        className="flex gap-3 md:gap-4 p-3 md:p-4 border border-gray-100 rounded-lg hover:shadow-md transition-shadow group"
                       >
-                        <div className="relative">
+                        <div className="relative flex-shrink-0">
                           <ImageWithFallback
                             src={item.image}
                             alt={item.name}
-                            className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                            className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg"
                           />
-                          {/* Overlay com ações rápidas */}
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                          {/* Overlay com ações rápidas - apenas em desktop */}
+                          <div className="hidden md:flex absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg items-center justify-center">
                             <motion.button
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.9 }}
@@ -105,15 +111,15 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                             </motion.button>
                           </div>
                         </div>
-                      
-                        <div className="flex-1 space-y-2">
-                          <h4 className="font-medium text-gray-800 group-hover:text-pink-600 transition-colors">
+
+                        <div className="flex-1 min-w-0 space-y-1 md:space-y-2">
+                          <h4 className="font-medium text-sm md:text-base text-gray-800 group-hover:text-pink-600 transition-colors truncate">
                             {item.name}
                           </h4>
-                          <p className="text-pink-500 font-semibold text-lg">
+                          <p className="text-pink-500 font-semibold text-base md:text-lg">
                             {item.price}
                           </p>
-                          
+
                           {/* Avaliação fictícia */}
                           <div className="flex items-center gap-1">
                             {[...Array(5)].map((_, i) => (
@@ -121,27 +127,28 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                             ))}
                             <span className="text-xs text-gray-500 ml-1">4.8</span>
                           </div>
-                          
-                          <div className="flex gap-2 mt-3">
+
+                          <div className="flex gap-2 mt-2 md:mt-3">
                             <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
-                              <Button 
+                              <Button
                                 size="sm"
                                 onClick={() => handleAddToCart(item)}
-                                className="w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
+                                className="w-full text-xs md:text-sm bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
                               >
-                                <ShoppingCart className="w-4 h-4 mr-1" />
-                                Adicionar
+                                <ShoppingCart className="w-3 h-3 md:w-4 md:h-4 mr-1" />
+                                <span className="hidden sm:inline">Adicionar</span>
+                                <span className="sm:hidden">Add</span>
                               </Button>
                             </motion.div>
-                            
+
                             <motion.div whileTap={{ scale: 0.95 }}>
                               <Button
                                 size="sm"
                                 variant="outline"
                                 onClick={() => handleRemoveFromWishlist(item)}
-                                className="px-3 border-red-200 text-red-600 hover:bg-red-50"
+                                className="px-2 md:px-3 border-red-200 text-red-600 hover:bg-red-50"
                               >
-                                <Trash2 className="w-4 h-4" />
+                                <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
                               </Button>
                             </motion.div>
                           </div>
@@ -152,18 +159,18 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                 </div>
               </div>
 
-              {/* Footer */}
-              <div className="border-t pt-6 space-y-4">
-                <div className="p-3 bg-gradient-to-r from-pink-50 to-orange-50 rounded-lg">
-                  <p className="text-sm text-gray-600 text-center">
+              {/* Footer - Fixed at Bottom */}
+              <div className="flex-shrink-0 border-t pt-3 md:pt-4 pb-2 space-y-3 md:space-y-4 bg-white">
+                <div className="p-2 md:p-3 bg-gradient-to-r from-pink-50 to-orange-50 rounded-lg">
+                  <p className="text-xs md:text-sm text-gray-600 text-center">
                     💡 <strong>Dica:</strong> Adicione todos ao carrinho de uma vez!
                   </p>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2 md:space-y-3">
                   <motion.div whileTap={{ scale: 0.98 }}>
-                    <Button 
-                      className="w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
+                    <Button
+                      className="w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 text-sm md:text-base"
                       size="lg"
                       onClick={() => {
                         items.forEach(item => handleAddToCart(item));
@@ -171,14 +178,15 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                       }}
                       disabled={items.length === 0}
                     >
-                      <ShoppingCart className="w-5 h-5 mr-2" />
-                      Adicionar Todos ao Carrinho
+                      <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                      <span className="hidden sm:inline">Adicionar Todos ao Carrinho</span>
+                      <span className="sm:hidden">Adicionar Todos</span>
                     </Button>
                   </motion.div>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-pink-200 text-pink-600 hover:bg-pink-50"
+
+                  <Button
+                    variant="outline"
+                    className="w-full border-pink-200 text-pink-600 hover:bg-pink-50 text-sm md:text-base"
                     onClick={onClose}
                   >
                     Continuar Navegando
