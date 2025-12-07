@@ -28,7 +28,7 @@ export const CONTATO = {
 export const REDES_SOCIAIS = {
     INSTAGRAM: 'https://www.instagram.com/confeitariaeuforia/',
     FACEBOOK: 'https://www.facebook.com/euforia.confeitaria',
-    IFOOD: 'https://www.ifood.com.br/delivery/sao-paulo-sp/euforia-confeitaria',
+    IFOOD: 'https://www.ifood.com.br/delivery/guarulhos-sp/confeitaria-euforia-jardim-guarulhos/943689ad-9e5b-4dd9-ae70-acd795654cca',
 };
 
 // Função helper para gerar link do WhatsApp

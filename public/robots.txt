@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://confeitariaeuforia.vercel.app/sitemap.xml
+
+# Crawl-delay para não sobrecarregar (opcional)
+Crawl-delay: 1

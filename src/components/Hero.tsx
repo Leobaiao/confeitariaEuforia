@@ -1,8 +1,6 @@
 
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { UtensilsCrossed } from 'lucide-react';
-import logoEuforia from '../assets/logo.png';
 
 export function Hero() {
   return (
@@ -11,18 +9,6 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="space-y-8">
-            {/* Logo da marca no Hero */}
-            <div className="flex items-center space-x-6 mb-8">
-              <img
-                src={logoEuforia}
-                alt="Euforia Confeitaria Artesanal"
-                className="w-50 h-50 object-contain"
-              />
-              <div className="text-5xl font-euforia bg-gradient-to-r from-pink-500 to-orange-400 bg-clip-text text-transparent font-[Delius_Unicase]">
-                Euforia
-              </div>
-            </div>
-
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl font-bold">
                 <span className="bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
@@ -62,14 +48,6 @@ export function Hero() {
                 className="border-pink-200 text-pink-600 hover:bg-pink-50 px-8 py-6"
               >
                 Fazer Encomenda
-              </Button>
-              <Button
-                size="lg"
-                onClick={() => window.open('https://www.ifood.com.br/delivery/sao-paulo-sp/euforia-confeitaria', '_blank')}
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <UtensilsCrossed className="w-5 h-5 mr-2" />
-                Pedir no iFood
               </Button>
             </div>
 

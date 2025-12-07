@@ -1,5 +1,6 @@
 import { UtensilsCrossed } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { REDES_SOCIAIS } from '../constants';
 
 export function FloatingIFood() {
   return (
@@ -12,7 +13,7 @@ export function FloatingIFood() {
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => window.open('https://www.ifood.com.br/delivery/sao-paulo-sp/euforia-confeitaria', '_blank')}
+        onClick={() => window.open(REDES_SOCIAIS.IFOOD, '_blank')}
         className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center group"
         title="Pedir no iFood"
       >
