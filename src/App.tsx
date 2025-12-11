@@ -11,19 +11,13 @@ import { WishlistSidebar } from './components/WishlistSidebar';
 import { FloatingIFood } from './components/FloatingIFood';
 import { ScrollToTop } from './components/ScrollToTop';
 import { Toaster } from './components/ui/sonner';
-import React from 'react';
 
 export default function App() {
-  const [wishlistOpen, setWishlistOpen] = React.useState(false);
-
   return (
     <WishlistProvider>
       <CartProvider>
         <div className="min-h-screen">
-          <Header
-            wishlistOpen={wishlistOpen}
-            setWishlistOpen={setWishlistOpen}
-          />
+          <Header />
           <main>
             <Hero />
             <Products />
@@ -32,10 +26,7 @@ export default function App() {
           </main>
           <Footer />
           <CartSidebar />
-          <WishlistSidebar
-            isOpen={wishlistOpen}
-            onClose={() => setWishlistOpen(false)}
-          />
+          <WishlistSidebar />
           <FloatingIFood />
           <ScrollToTop />
           <Toaster

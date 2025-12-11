@@ -3,6 +3,9 @@
 // Altere os valores aqui para atualizar em todo o site
 // ============================================
 
+// Número do WhatsApp para uso direto
+export const WHATSAPP_NUMBER = '5511992232935';
+
 export const CONTATO = {
     // WhatsApp (formato internacional, sem + ou espaços)
     WHATSAPP_NUMERO: '5511992232935',

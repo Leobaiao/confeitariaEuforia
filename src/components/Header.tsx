@@ -6,15 +6,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import React from 'react';
 import logoEuforia from '../assets/logo.png';
 
-interface HeaderProps {
-  wishlistOpen: boolean;
-  setWishlistOpen: (open: boolean) => void;
-}
-
-export function Header({ wishlistOpen, setWishlistOpen }: HeaderProps) {
+export function Header() {
   const { toggleCart, getTotalItems } = useCart();
-  const { getTotalItems: getWishlistItems } = useWishlist();
+  const { getTotalItems: getWishlistItems, openWishlist } = useWishlist();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-pink-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,7 +63,8 @@ export function Header({ wishlistOpen, setWishlistOpen }: HeaderProps) {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setWishlistOpen(true)}
+              onClick={openWishlist}
+              aria-label="Abrir lista de favoritos"
               className="hidden sm:flex items-center space-x-2 border-pink-200 text-pink-600 hover:bg-pink-50 relative"
             >
               <Heart className="w-4 h-4" />
@@ -88,6 +85,7 @@ export function Header({ wishlistOpen, setWishlistOpen }: HeaderProps) {
               variant="outline"
               size="sm"
               onClick={toggleCart}
+              aria-label="Abrir carrinho de compras"
               className="hidden sm:flex items-center space-x-2 border-pink-200 text-pink-600 hover:bg-pink-50 relative"
             >
               <ShoppingBag className="w-4 h-4" />
@@ -107,6 +105,7 @@ export function Header({ wishlistOpen, setWishlistOpen }: HeaderProps) {
               variant="ghost"
               size="sm"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -161,7 +160,7 @@ export function Header({ wishlistOpen, setWishlistOpen }: HeaderProps) {
               <div className="pt-4 border-t border-pink-100 space-y-3">
                 <Button
                   onClick={() => {
-                    setWishlistOpen(true);
+                    openWishlist();
                     setMobileMenuOpen(false);
                   }}
                   variant="outline"

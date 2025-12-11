@@ -6,15 +6,11 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Heart, Trash2, ShoppingCart, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import { formatPrice } from '../data/products';
 
-interface WishlistSidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
-  const { items, removeFromWishlist } = useWishlist();
-  const { addToCart } = useCart();
+export function WishlistSidebar() {
+  const { items, removeFromWishlist, isOpen, closeWishlist } = useWishlist();
+  const { addToCart, openCart } = useCart();
 
   const handleAddToCart = (item: typeof items[0]) => {
     addToCart({
@@ -25,7 +21,11 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
     });
 
     toast.success(`${item.name} adicionado ao carrinho! 🛒`, {
-      description: 'Item movido da wishlist para o carrinho'
+      description: 'Item movido da wishlist para o carrinho',
+      action: {
+        label: 'Ver carrinho',
+        onClick: () => openCart()
+      }
     });
   };
 
@@ -36,8 +36,25 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
     });
   };
 
+  const handleAddAllToCart = () => {
+    items.forEach(item => {
+      addToCart({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        image: item.image
+      });
+    });
+    toast.success(`${items.length} itens adicionados ao carrinho! 🛒`, {
+      action: {
+        label: 'Ver carrinho',
+        onClick: () => openCart()
+      }
+    });
+  };
+
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
+    <Sheet open={isOpen} onOpenChange={closeWishlist}>
       <SheetContent className="w-full sm:max-w-lg">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
@@ -66,7 +83,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
               </p>
               <Button
                 onClick={() => {
-                  onClose();
+                  closeWishlist();
                   setTimeout(() => {
                     document.getElementById('produtos')?.scrollIntoView({
                       behavior: 'smooth'
@@ -105,6 +122,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.9 }}
                               onClick={() => handleAddToCart(item)}
+                              aria-label={`Adicionar ${item.name} ao carrinho`}
                               className="bg-white/90 p-2 rounded-full hover:bg-white transition-colors"
                             >
                               <ShoppingCart className="w-4 h-4 text-pink-500" />
@@ -117,7 +135,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                             {item.name}
                           </h4>
                           <p className="text-pink-500 font-semibold text-base md:text-lg">
-                            {item.price}
+                            {formatPrice(item.price)}
                           </p>
 
                           {/* Avaliação fictícia */}
@@ -133,6 +151,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                               <Button
                                 size="sm"
                                 onClick={() => handleAddToCart(item)}
+                                aria-label={`Adicionar ${item.name} ao carrinho`}
                                 className="w-full text-xs md:text-sm bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
                               >
                                 <ShoppingCart className="w-3 h-3 md:w-4 md:h-4 mr-1" />
@@ -146,6 +165,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                                 size="sm"
                                 variant="outline"
                                 onClick={() => handleRemoveFromWishlist(item)}
+                                aria-label={`Remover ${item.name} dos favoritos`}
                                 className="px-2 md:px-3 border-red-200 text-red-600 hover:bg-red-50"
                               >
                                 <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
@@ -172,10 +192,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                     <Button
                       className="w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 text-sm md:text-base"
                       size="lg"
-                      onClick={() => {
-                        items.forEach(item => handleAddToCart(item));
-                        toast.success(`${items.length} itens adicionados ao carrinho! 🛒`);
-                      }}
+                      onClick={handleAddAllToCart}
                       disabled={items.length === 0}
                     >
                       <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 mr-2" />
@@ -187,7 +204,7 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
                   <Button
                     variant="outline"
                     className="w-full border-pink-200 text-pink-600 hover:bg-pink-50 text-sm md:text-base"
-                    onClick={onClose}
+                    onClick={closeWishlist}
                   >
                     Continuar Navegando
                   </Button>
